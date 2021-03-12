@@ -1,0 +1,25 @@
+div .player {
+  height: 40em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.player-video {
+  width: 70%;
+  height: 50%;
+}
+
+.button-player {
+  margin-top: 5%;
+  width: 5em;
+  height: 5em;
+  border-radius: 50px;
+  border: 0;
+}
+
+.button-player:hover {
+  box-shadow: 2px 4px 10px rgb(29, 29, 29);
+}

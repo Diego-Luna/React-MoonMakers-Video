@@ -1,14 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./routes/App.js";
+import reportWebVitals from "./reportWebVitals";
+
+// creando un store con redux
+// compose, espara la extension de chrome
+import { createStore, compose, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import reducer from "./reducers/index";
+import thunk from "redux-thunk";
+
+const initialState = {
+  user: {},
+  playing: {},
+  myList: [],
+  trends: [],
+  originals: [],
+};
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  reducer,
+  initialState,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
