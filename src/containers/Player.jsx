@@ -13,7 +13,7 @@ const Player = (props) => {
   const hasPlaying = Object.keys(props.playing).length > 0;
   useEffect(() => {
     props.getVideoSource(id);
-  }, []);
+  },[]);
   // return hasPlaying ? (
   //   <div className='Player'>
   //     <video controls autoPlay>

@@ -12,7 +12,11 @@ import reducer from "./reducers/index";
 import thunk from "redux-thunk";
 
 const initialState = {
-  user: {},
+  user: {
+    email: "",
+    name: "",
+    id: "",
+  },
   playing: {},
   myList: [],
   trends: [],
