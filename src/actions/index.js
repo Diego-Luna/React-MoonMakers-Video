@@ -105,7 +105,7 @@ export const registerUser = (payload, redirectUrl) => {
         name: payload.name,
         password: payload.password,
       })
-      .then(({ data }) => dispatch(registerRequest(data)))
+      // .then(({ data }) => dispatch(registerRequest(data)))
       .then(() => {
         // si todo salio bien, reirecciona a la url que tenemos
         window.location.href = redirectUrl;
@@ -173,7 +173,7 @@ export const loginUser = ({ email, password, rememberMe }, redirectUrl) => {
 
 // ----> Seccciond de favoritos en backend <----
 export const setFavoriteBackend = (payload) => {
-  const { _id, userID } = payload;
+  const { _id, userId } = payload;
 
   return (dispatch) => {
     axios({
@@ -181,7 +181,7 @@ export const setFavoriteBackend = (payload) => {
       url: `${env.API_URL}/api/user-movies`,
       headers: { Authorization: `Bearer ${leerCookie("token")}` },
       data: {
-        userId: userID,
+        userId: userId,
         movieId: _id,
       },
     })
@@ -193,19 +193,36 @@ export const setFavoriteBackend = (payload) => {
   };
 };
 
-export const deleteFavoriteBackend = ({ _id, userID }) => {
-  return (dispatch) => {
+export const deleteFavoriteBackend = ({ _id, id, userId }) => {
+
+  return () => {
     axios({
       url: `${env.API_URL}/api/user-movies/${_id}`,
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${leerCookie("token")}`,
-      },
-      data: { userID },
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${leerCookie("token")}` },
+      data: { userId },
     })
-      .then(console.log('funcionao el boorar en actions'))
-      .catch((err) => dispatch(setError(err)));
+      .then(({ data }) => console.log(data))
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   };
 };
+// export const deleteFavoriteBackend = ({ _id, id,userID }) => {
 
-export { setFavorite as default };
+//   return (dispatch) => {
+//     axios({
+//       url: `${env.API_URL}/api/user-movies/${_id}`,
+//       method: "DELETE",
+//       headers: {
+//         Authorization: `Bearer ${leerCookie("token")}`,
+//       },
+//       data: { userID },
+//     })
+//       .then(({ data }) => console.log(data.message))
+//       .catch((err) => dispatch(setError(err)));
+//   };
+// };
+
+// export { setFavorite as default };

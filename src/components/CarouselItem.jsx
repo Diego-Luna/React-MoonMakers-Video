@@ -29,7 +29,7 @@ const CarouselItem = (props) => {
 
   const { myList, user } = props;
 
-  let userID = user.id;
+  let userId = user.id;
 
   const handleSetFavorite = () => {
     props.setFavorite({
@@ -44,11 +44,11 @@ const CarouselItem = (props) => {
 
     props.setFavoriteBackend({
       _id,
-      userID,
+      userId,
     });
   };
   const handleDeleteFavorite = (itemId) => {
-    props.deleteFavoriteBackend({ _id, id, userID });
+    props.deleteFavoriteBackend({ _id, id, userId });
     props.deleteFavorite(itemId);
   };
   return (
