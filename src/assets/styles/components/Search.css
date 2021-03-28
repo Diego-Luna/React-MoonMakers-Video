@@ -29,6 +29,10 @@
   padding: 0px 20px;
 }
 
+.result-search{
+  background-color: #c5c5c5;
+}
+
 ::placeholder {
   color: black;
 }

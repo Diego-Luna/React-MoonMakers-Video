@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_CHECKOUT":
@@ -40,7 +41,6 @@ const reducer = (state, action) => {
         user: cokies(),
       };
     case "COURSES_ADD":
-      console.log(action.payload);
 
       return {
         ...state,
@@ -52,25 +52,20 @@ const reducer = (state, action) => {
         ),
       };
     case "COURSES_ADD_USER":
-      console.log(action.payload);
 
-      const userMovieTrends = state.trends.filter(
-        (movie) => {
-          let isUserMovie = action.payload.some(
-            userHas => userHas.movieId === movie._id,
-          );
-          return isUserMovie;
-        },
-      );
+      const userMovieTrends = state.trends.filter((movie) => {
+        let isUserMovie = action.payload.some(
+          (userHas) => userHas.movieId === movie._id
+        );
+        return isUserMovie;
+      });
 
-      const userMovieOriginals = state.originals.filter(
-        (movie) => {
-          let isUserMovie = action.payload.some(
-            userHas => userHas.movieId === movie._id,
-          );
-          return isUserMovie;
-        },
-      );
+      const userMovieOriginals = state.originals.filter((movie) => {
+        let isUserMovie = action.payload.some(
+          (userHas) => userHas.movieId === movie._id
+        );
+        return isUserMovie;
+      });
 
       const userMovieList = userMovieTrends.concat(userMovieOriginals);
 
@@ -111,6 +106,31 @@ const reducer = (state, action) => {
           state.originals.find((item) => item.id === action.payload) ||
           {},
         // [],
+      };
+    case "SEARCH_API":
+      var searchResult1 = "";
+      var searchResult2 = "";
+      var result = [];
+
+      if (action.payload === "") {
+        searchResult1 = "";
+        searchResult2 = "";
+        result = [];
+      } else {
+        searchResult1 = state.trends.filter(
+          (word) =>
+            word.title.toLowerCase().indexOf(action.payload.toLowerCase()) > -1
+        );
+        searchResult2 = state.originals.filter(
+          (word) =>
+            word.title.toLowerCase().indexOf(action.payload.toLowerCase()) > -1
+        );
+        result = searchResult1.concat(searchResult2);
+      }
+
+      return {
+        ...state,
+        search: result,
       };
     default:
       return state;

@@ -17,12 +17,10 @@ const App = (props) => {
   const { user } = props;
 
   useEffect(() => {
-    console.log("estamos dentro");
     props.loginCheckout();
   }, []);
 
   if (user.name.length > 1) {
-    console.log("estamos en el if");
     props.dataApi();
     props.dataApiCoursesUSer();
   }

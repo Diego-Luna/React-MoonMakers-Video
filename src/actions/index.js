@@ -66,6 +66,11 @@ export const coursesAddUser = (payload) => ({
   payload,
 });
 
+export const searchApi = (payload) => ({
+  type: "SEARCH_API",
+  payload,
+});
+
 export const dataApiCoursesUSer = (payload, redirectUrl) => {
   return (dispatch) => {
     axios({
@@ -125,8 +130,6 @@ export const loginUser = ({ email, password, rememberMe }, redirectUrl) => {
   const THIRTY_DAYS_IN_SEC = 2592000;
   const TWO_HOURS_IN_SEC = 7200;
 
-  console.log(env.API_KEY_TOKEN);
-
   return (dispatch) => {
     axios({
       url: `${env.API_URL}/api/auth/sign-in`,
@@ -141,7 +144,7 @@ export const loginUser = ({ email, password, rememberMe }, redirectUrl) => {
     })
       // guardamos la informacion en el navegador
       .then(({ data }) => {
-        console.log(data);
+
         document.cookie = `email=${data.user.email}; max-age=${
           rememberMe ? THIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC
         };`;
@@ -209,20 +212,4 @@ export const deleteFavoriteBackend = ({ _id, id, userId }) => {
       });
   };
 };
-// export const deleteFavoriteBackend = ({ _id, id,userID }) => {
 
-//   return (dispatch) => {
-//     axios({
-//       url: `${env.API_URL}/api/user-movies/${_id}`,
-//       method: "DELETE",
-//       headers: {
-//         Authorization: `Bearer ${leerCookie("token")}`,
-//       },
-//       data: { userID },
-//     })
-//       .then(({ data }) => console.log(data.message))
-//       .catch((err) => dispatch(setError(err)));
-//   };
-// };
-
-// export { setFavorite as default };

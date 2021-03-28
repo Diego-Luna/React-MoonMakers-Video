@@ -17,6 +17,7 @@ const initialState = {
     name: "",
     id: "",
   },
+  search: [],
   playing: {},
   myList: [],
   trends: [],
